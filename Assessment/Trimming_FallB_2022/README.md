@@ -4,7 +4,7 @@ Course Assessment Sections
 1. Analysis of student results based on pre-assessment and post-assessment results in biology, coding, and professional development
 2. Analysis of student Likert scores 
 3. Analysis of self-reported challenges and coping strategies
-4. Slack analysis of activity and messages posted
+4. Analysis of Slack activity and messages posted
 
 To access Slack analytics (as an administrator):
 - Click the dropdown on the workspace menu
