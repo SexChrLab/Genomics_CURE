@@ -7,7 +7,8 @@ Course Assessment Sections
 4. Analysis of Slack activity and messages posted
 
 To access Slack analytics (as an administrator):
-- Click the dropdown on the workspace menu
+- Select the workspace for the course
+- Access the pulldown menu for the workspace (just to the right of the workspace name)
 - Hover over the 'Tools' menu to select analytics (external window)
 - Select the 'Members' tab
 - The number of days will default to 'Last 30 Days', click this menu to access the 'Range' option
