@@ -13,4 +13,3 @@ To access Slack analytics (as an administrator):
 - The number of days will default to 'Last 30 Days', click this menu to access the 'Range' option
 - Enter the specific date range as prompted _(dates in this example ranged from Oct 2 - Dec 2, 2022)_
 - 'Export CSV' or 'Edit columns' as needed
-
