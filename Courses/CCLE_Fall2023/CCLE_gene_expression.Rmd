@@ -13,7 +13,7 @@ output:
 
 This R code written in Rmd format is template code meant to be a starting point to analyze gene expression data from the Cancer Cell Line Encyclopedia (CCLE).  You have completed a tutorial in R which should help you to modify this to analysis different genes and look across various features of the data set.  This code sometimes shows multiple ways to do the same thing just for your learning; feel free to stick with the way you like best when adding to the code.
 
-You will need to modify the following things for sure: 
+You will need to modify the following things at least: 
 1) Change the author in the header to be your name
 2) Change the paths to the data to be paths in your directories
 3) Change the gene names and cell line features to reflect what you are wanting to study
@@ -28,6 +28,12 @@ Ask for help from the instructors and your classmates using Slack.
 library(ggplot2)
 library(UpSetR)
 
+```
+
+## Set options for printing reports
+
+```{r Printoptions}
+knitr::opts_chunk$set(tidy.opts = list(width.cutoff = 50), tidy = TRUE)
 ```
 
 
@@ -172,7 +178,7 @@ chosen_gene = "XIST"
 
 # pull out the data for this gene from the full data matrix
 chosen_gene_data = subset(CCLE_data, Description == chosen_gene)
-print (chosen_gene_data)
+print (chosen_gene_data[1:10])
 
 # remove the first two columns since we are only intersted in the expression data
 chosen_gene_subset = subset(chosen_gene_data, select = -c(1,2))
@@ -217,23 +223,23 @@ ggplot(chosen_gene_reported_sex, aes(x=reported_sex, y=chosen_gene_reported_sex$
 
 # count how many cell lines reported female are in each region defined by the thresholds chosen
 num_females_over_high_threshold = nrow(subset(chosen_gene_reported_sex, reported_sex == "female" & expression >= high_threshold))
-num_females_between_thresholds = nrow(subset(chosen_gene_reported_sex, reported_sex == "female" & expression < high_threshold & expression > low_theshold))
-num_females_under_low_threshold = nrow(subset(chosen_gene_reported_sex, reported_sex == "female" & expression <= low_theshold))
+num_females_between_thresholds = nrow(subset(chosen_gene_reported_sex, reported_sex == "female" & expression < high_threshold & expression > low_threshold))
+num_females_under_low_threshold = nrow(subset(chosen_gene_reported_sex, reported_sex == "female" & expression <= low_threshold))
 
 # pie chart to show proportions using the chosen threshold
 # can use this to try a few different thresholds
 female_threshold_nums = c(num_females_over_high_threshold, num_females_between_thresholds, num_females_under_low_threshold)
 female_threshold_labels = c(paste0(">= high threshold of ",high_threshold),"between",paste0("<= low threshold of ",low_threshold))
-pie(female_threshold_nums, labels = female_threshold_labels, main = paste0 ("Thresholds for cell lines reported female [n =",sum(female_threshold_nums),"]"))
+pie(female_threshold_nums, labels = female_threshold_labels, main = paste0 ("Thresholds for cell lines reported female [n =",sum(female_threshold_nums),"]"), col = c("orange","grey","blue"))
 
 # now do the same for cell lines reported as male
 num_males_over_high_threshold = nrow(subset(chosen_gene_reported_sex, reported_sex == "male" & expression >= high_threshold))
-num_males_between_thresholds = nrow(subset(chosen_gene_reported_sex, reported_sex == "male" & expression < high_threshold & expression > low_theshold))
-num_males_under_low_threshold = nrow(subset(chosen_gene_reported_sex, reported_sex == "male" & expression <= low_theshold))
+num_males_between_thresholds = nrow(subset(chosen_gene_reported_sex, reported_sex == "male" & expression < high_threshold & expression > low_threshold))
+num_males_under_low_threshold = nrow(subset(chosen_gene_reported_sex, reported_sex == "male" & expression <= low_threshold))
 
 male_threshold_nums = c(num_males_over_high_threshold, num_males_between_thresholds, num_males_under_low_threshold)
 male_threshold_labels = c(paste0(">= high threshold of ",high_threshold),"between",paste0("<= low threshold of ",low_threshold))
-pie(male_threshold_nums, labels = male_threshold_labels, main = paste0 ("Thresholds for cell lines reported male [n =",sum(male_threshold_nums),"]"))
+pie(male_threshold_nums, labels = male_threshold_labels, main = paste0 ("Thresholds for cell lines reported male [n =",sum(male_threshold_nums),"]"), col = c("orange","grey","blue"))
 
 # use chosen thresholds to predict sex based on expression
 
@@ -370,19 +376,6 @@ ggplot(chosen_gene_reported_age, aes(x=chosen_gene_reported_age$age, y=chosen_ge
 
 
 ```
-
-
-
-```
-
-``` {r SetThresholds}
-
-high.log.threshold = -1
-low.log.threshold = -2
-
-```
-
-
 
 ## List all the packages used for future reference
 
